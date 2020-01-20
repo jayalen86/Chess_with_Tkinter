@@ -447,6 +447,7 @@ class App():
                 direction = sign2(direction, 1)
             elif switch == 0 and self.adversary[0] == str(self.board[row][direction])[0]:
                 self.highlight_squares(square)
+                return
             elif switch == 0 and self.highlighted_piece[1] == 'R' and (square == 'r7c4' or square == 'r0c4'):
                 self.check_castle(square)
                 break
@@ -493,6 +494,7 @@ class App():
 
     def vertical(self, direction, sign1, num1, sign2, col, switch):
         while sign1(direction, num1):
+            print(3)
             square =  'r'+str(direction)+'c'+str(col)
             if  (switch == 0 or switch == 1) and self.board[direction][col] == 0:
                 self.highlight_squares(square)
