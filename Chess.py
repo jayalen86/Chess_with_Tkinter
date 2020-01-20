@@ -412,7 +412,6 @@ class App():
     def get_queen_moves(self, piece, current_square, switch):
         row = int(current_square[1])
         col = int(current_square[3])
-
         left = col-1
         up = row-1
         right = col+1
@@ -454,10 +453,14 @@ class App():
             elif switch == 1 and self.adversary[0]+'K' in str(self.board[row][direction]):
                 self.announce_check()
                 return
-            elif switch == 2:
+            elif switch == 2 and self.board[row][direction] == 0:
                 if self.current_turn[0]+'K' in str(self.board[row][direction]):
                     self.stopper = True
-                return    
+                    break
+                elif str(self.board[row][direction]) != str(0):
+                    break
+                else:
+                    direction = sign2(direction, 1) 
             else:
                 break
         return
@@ -478,14 +481,18 @@ class App():
             elif switch == 2:
                 if self.current_turn[0]+'K' in str(self.board[row][col]):
                     self.stopper = True
-                return
+                    break
+                elif str(self.board[row][col]) != str(0):
+                    break
+                else:
+                    row = sign3(row, 1)
+                    col = sign4(col, 1)
             else:
                 break
         return
 
     def vertical(self, direction, sign1, num1, sign2, col, switch):
         while sign1(direction, num1):
-            
             square =  'r'+str(direction)+'c'+str(col)
             if  (switch == 0 or switch == 1) and self.board[direction][col] == 0:
                 self.highlight_squares(square)
@@ -499,7 +506,11 @@ class App():
             elif switch == 2:
                 if self.current_turn[0]+'K' in str(self.board[direction][col]):
                     self.stopper = True
-                return
+                    break
+                elif str(self.board[direction][col]) != str(0):
+                    break
+                else:
+                    direction = sign2(direction, 1)
             else:
                 break
         return
