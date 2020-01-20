@@ -494,7 +494,6 @@ class App():
 
     def vertical(self, direction, sign1, num1, sign2, col, switch):
         while sign1(direction, num1):
-            print(3)
             square =  'r'+str(direction)+'c'+str(col)
             if  (switch == 0 or switch == 1) and self.board[direction][col] == 0:
                 self.highlight_squares(square)
